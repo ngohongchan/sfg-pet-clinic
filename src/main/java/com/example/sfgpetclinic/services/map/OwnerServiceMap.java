@@ -2,6 +2,7 @@ package com.example.sfgpetclinic.services.map;
 
 
 import com.example.sfgpetclinic.Model.Owner;
+import com.example.sfgpetclinic.Model.Pet;
 import com.example.sfgpetclinic.services.OwnerService;
 import com.example.sfgpetclinic.services.PetService;
 import com.example.sfgpetclinic.services.PetTypeService;
@@ -35,7 +36,16 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Integer> implemen
             if(object.getPets() != null) {
                 object.getPets().forEach(pet -> {
                     if(pet.getPetType() != null) {
+                        if(pet.getPetType().getId() != null) {
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    } else {
+                        throw new RuntimeException("Pet type is required");
+                    }
 
+                    if(pet.getId() == null) {
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
                     }
                 });
             }
