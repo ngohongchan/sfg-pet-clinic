@@ -2,11 +2,13 @@ package com.example.sfgpetclinic.services.map;
 
 import com.example.sfgpetclinic.Model.PetType;
 import com.example.sfgpetclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class PetTypeMapService extends AbstractMapService<PetType, Integer> implements PetTypeService {
     @Override
     public Set<PetType> findAll() {
@@ -24,7 +26,7 @@ public class PetTypeMapService extends AbstractMapService<PetType, Integer> impl
     }
 
     @Override
-    void delete(PetType object) {
+    public void delete(PetType object) {
         super.delete(object);
     }
 
