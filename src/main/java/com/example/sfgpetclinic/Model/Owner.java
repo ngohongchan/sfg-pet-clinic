@@ -12,6 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person{
+
     @Builder
     public Owner(String address, String city, String telephone, Set<Pet> pets) {
         this.address = address;
